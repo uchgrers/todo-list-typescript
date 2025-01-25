@@ -22,7 +22,7 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "node src/server/server.js",
-    "client": "react-scripts start",
+    "client": "PORT=8081 react-scripts start",
     "build": "npm run build:frontend",
     "build:frontend": "react-scripts build",
     "test": "react-scripts test",

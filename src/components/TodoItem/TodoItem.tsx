@@ -15,9 +15,10 @@ const TodoItem: React.FC<TodoItemType> = (props) => {
     })
     const [isEditing, setIsEditing] = useState(false)
     const todosToBeRemoved = useAppSelector(state => state.todosReducer.todosToBeRemoved)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const todoIsRemoving = useMemo(() => {
         return todosToBeRemoved.includes(props.id)
-    }, [todosToBeRemoved])
+    }, [todosToBeRemoved, props.id])
     const dispatch = useAppDispatch()
 
     useEffect(() => {

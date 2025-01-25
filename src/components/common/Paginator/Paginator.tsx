@@ -15,7 +15,7 @@ const Paginator = () => {
         if (currentPage > pages) {
             dispatch(changeCurrentPage(pages))
         }
-    },[currentPage, pageSize, itemsCount])
+    },[dispatch, currentPage, pageSize, itemsCount, pages])
 
     useEffect(() => {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});

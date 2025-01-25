@@ -29,7 +29,7 @@ function App() {
             document.cookie = `userId=${createdUserId}; path=/; max-age=${60 * 60 * 24 * 365}`
             setUserId(userId)
         }
-    }, [])
+    }, [userId])
 
     useEffect(() => {
         const fetchTodos = async () => {
@@ -40,7 +40,7 @@ function App() {
             }
         }
         fetchTodos()
-    }, [dispatch])
+    }, [dispatch, userId])
 
     const addNewTodo = (e: React.FormEvent) => {
         if (text && text.header) {

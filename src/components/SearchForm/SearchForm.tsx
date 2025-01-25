@@ -21,7 +21,7 @@ const SearchForm = () => {
         return () => {
             clearTimeout(searchTimeout)
         }
-    }, [text])
+    }, [dispatch, text, isInputTouched])
 
     return (
         <form className={styles.form}>

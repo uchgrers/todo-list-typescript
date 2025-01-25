@@ -27,7 +27,7 @@ const TodosList = () => {
 
     useEffect(() => {
         dispatch(setTodosCount(filteredTasks.tasksCount))
-    }, [todosComponents.length])
+    }, [dispatch, todosComponents.length, filteredTasks.tasksCount])
 
     return (
         <ul className={styles.list}>
