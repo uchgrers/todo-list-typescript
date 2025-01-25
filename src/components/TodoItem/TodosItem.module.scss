@@ -1,0 +1,95 @@
+@import "src/styles/mixins";
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  column-gap: 20px;
+
+  --maxTextWidth: 320px;
+  --indicatorRotate: 90deg;
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    row-gap: 2px;
+    width: 100%;
+    padding: 10px 20px;
+    border: var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    transition-duration: var(--transition-duration);
+    background-color: var(--color-gray);
+
+    &:hover {
+      background-color: var(--color-accent);
+    }
+
+    &[open] {
+      background-color: var(--color-accent);
+      --indicatorRotate: 0;
+    }
+  }
+
+  &__completed {
+    text-decoration: line-through;
+    opacity: var(--opacity);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+    width: 100%;
+    max-width: var(--maxTextWidth);
+    padding: 20px 0;
+
+    @include text-align-left;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & div {
+      flex-shrink: 100;
+    }
+  }
+
+  &__description {
+    display: block;
+    width: 100%;
+    max-width: var(--maxTextWidth);
+    border-top: 1px gray solid;
+    padding: 20px 0;
+
+    @include text-align-left;
+  }
+
+  &__indicator {
+    position: relative;
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: var(--border);
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 4px;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      background-color: var(--color-dark);
+      border-radius: 2px;
+    }
+
+    &::before {
+      rotate: var(--indicatorRotate);
+      transition-duration: var(--transition-duration);
+    }
+  }
+}
