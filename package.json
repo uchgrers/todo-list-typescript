@@ -23,7 +23,7 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "node src/server/server.js",
     "client": "react-scripts start",
-    "build": "npm run build",
+    "build": "npm run build:frontend",
     "build:frontend": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
