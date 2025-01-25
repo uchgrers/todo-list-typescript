@@ -27,10 +27,10 @@ app.use((req, res, next) => {
 })
 
 app.use(cors({
-    origin: `http://localhost:${origin}`,
+    origin: process.env.CLIENT_URL || `http://localhost:${origin}`,
     preflightContinue: true,
     credentials: true,
-}))
+}));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
