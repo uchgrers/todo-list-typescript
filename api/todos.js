@@ -1,9 +1,16 @@
 let todos = []
 
 module.exports = (req, res) => {
+
+    const match = req.headers.cookie?.match(/userId=([^;]+)/);
+    if (!match) {
+        return res.status(401).json({ message: 'Unauthorized: userId not found' });
+    }
+    const userId = match[1];
+
     if (req.method === 'GET') {
         const searchParams = req.query.searchParams
-        const userTodos = todos.filter(todo => todo.userId === req.userId)
+        const userTodos = todos.filter(todo => todo.userId === userId)
         const requestedTodos = searchParams ?
             userTodos.filter(todo => todo.header.includes(searchParams)
                 || todo.description.includes(searchParams))
@@ -13,13 +20,13 @@ module.exports = (req, res) => {
             todosCount: requestedTodos.length
         })
     } else if (req.method === 'POST') {
-        let userTodos = todos.filter(todo => todo.userId === req.userId)
+        let userTodos = todos.filter(todo => todo.userId === userId)
         const newTodo = {
             id: userTodos.length,
             header: req.body.header,
             description: req.body.description,
             completed: false,
-            userId: req.userId
+            userId
         }
         todos = [...todos, newTodo]
         userTodos = [...userTodos, newTodo]
@@ -38,9 +45,9 @@ module.exports = (req, res) => {
         })
 
     } else if (req.method === 'PUT') {
-        let userTodos = todos.filter(todo => todo.userId === req.userId)
+        let userTodos = todos.filter(todo => todo.userId === userId)
         if (req.body.type === 'remove') {
-            const taskToDelete = todos.find(todo => todo.userId === req.userId && todo.id === req.body.id)
+            const taskToDelete = todos.find(todo => todo.userId === userId && todo.id === req.body.id)
             todos = todos.filter(todo => todo !== taskToDelete)
             userTodos = userTodos.filter(todo => todo.id !== req.body.id)
             for (let i = req.body.id; i < userTodos.length; i++) {
